@@ -13,15 +13,7 @@ A library for writing, validating and compiling quantum algorithm.
 
 ## Examples
 
-...
-
 ### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 

@@ -79,4 +79,76 @@
   {::qubit qubit
    ::operators operators})
 
-(s/explain (s/valid? ::register (dreg->mreg '[:q-1 H [CNOT :q-2] M])))
+(dreg->mreg '[:q-1 H [CNOT :q-2] M])
+
+(s/valid? ::register (dreg->mreg '[:q-1 H [CNOT :q-2] M]))
+
+(s/explain ::register (dreg->mreg '[:q-1 H [CNOT :q-2] M]))
+
+(dreg->mreg '[:q-1 H [CNOT :q-2] M])
+
+(s/valid? ::algorithm
+          (map dreg->mreg ['[:q-1 H [CNOT :q-2] [CNOT :q-3] M]
+                           '[:q-2 - [CNOT :q-1] -           M]
+                           '[:q-3 - -           [CNOT :q-1] M]]))
+
+(re-find #"q-" (name :q-1))
+
+(contains? '#{H CNOT T} 'P)
+
+(s/valid? ::qubit :q-1)
+
+(s/valid? ::operator '[CNOT :q-2])
+
+(s/valid? ::operator 'H)
+
+(gen/generate (s/gen ::qubit))
+
+(s/def ::H (s/and string?))
+
+(s/def ::T keyword?)
+
+(s/def ::CNOT keyword?)
+
+(s/def ::M keyword?)
+
+(s/def ::operator "H")
+
+(s/valid? ::operator "H")
+
+(gen/generate (s/gen ::operator))
+
+(defn qubit? [k]
+  (when (re-find #"^[q-]" (name k)) true))
+
+(defn operator? [op]
+  (contains? '#{H CNOT T M} op))
+
+::operator
+
+(ns qugen.core)
+
+(defn dreg->mreg [[qubit & operators]]
+  {::qubit qubit
+   ::operators operators})
+
+(dreg->mreg '[:q-1 H [CNOT :q-2] [CNOT :q-3] M])
+
+(-> operator?
+    s/gen
+    gen/generate)
+
+(defn convolutional []
+  {})
+
+(s/def ::layer (s/or :conv ::convolutional))
+
+(s/def ::layers (s/coll-of ::layer :min-count 1 :max-count 4))
+
+(gen/generate (s/gen ::layer))
+
+::convolutional
+
+(s/exercise ::qubit 5 {::qubit qubit-gen})
+
+(qubit-gen)

@@ -24,10 +24,19 @@ Clojure makes it simple for the user to express problems in really simple terms 
 Example for a data structure that resembles a quantum algorithm in qugen:
 
 ``` Clojure
-[
- '[:q-1 H |           |           M]
+['[:q-1 H |           |           M]
  '[:q-2 - [CNOT :q-1] -           M]
- '[:q-3 - -           [CNOT :q-1] M]
+ '[:q-3 - -           [CNOT :q-1] M]]
+```
+
+Example of a quantum Fourier transform
+```Clojure
+[
+ '[:q-1 H |              |              |              |               - -              -               -               - -               -               - -               - M]
+ '[:q-2 - [CP pi/2 :q-1] -              -              -               H |              |               |               - -               -               - -               - M]
+ '[:q-3 - -              [CP pi/4 :q-1] -              -               - [CP pi/2 :q-2] -               -               H |               |               - -               - M]
+ '[:q-4 - -              -              [CP pi/8 :q-1] -               - -              [CP pi/4 :q-2]  -               - [CP pi/2 :q-3]  -               H |               - M]
+ '[:q-5 - -              -              -              [CP pi/16 :q-1] - -              -               [CP pi/8 :q-2]  - -               [CP pi/4 :q-4]  - [CP pi/2 :q-4]  H M]
  ]
 ```
 

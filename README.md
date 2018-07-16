@@ -39,7 +39,7 @@ Example of a quantum Fourier transform
  '[:q-5 - -              -              -              [CP pi/16 :q-1] - -              -               [CP pi/8 :q-2]  - -               [CP pi/4 :q-4]  - [CP pi/2 :q-4]  H M]
  ]
 ```
-
+You don't need to add the dashes and the format is only for readability. 
 
 ## License
 

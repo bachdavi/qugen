@@ -23,9 +23,9 @@ Clojure makes it simple for the user to express problems in really simple terms 
 
 Example for a data structure that resembles a quantum algorithm in qugen:
 
-```
+``` Clojure
 [
- '[:q-1 H [CNOT :q-2] [CNOT :q-3] M]
+ '[:q-1 H |           |           M]
  '[:q-2 - [CNOT :q-1] -           M]
  '[:q-3 - -           [CNOT :q-1] M]
  ]
